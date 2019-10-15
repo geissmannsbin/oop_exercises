@@ -2,16 +2,19 @@ package ch.hslu.sw04;
 
 import java.lang.management.MemoryType;
 
-public final class Car implements Switchable {
+public final class Car implements CountingSwitchable {
 
     private Cabinlight fahrerLicht;
     private Headlight frontScheinwerfer;
     private Motor motor;
+    private long switchCount;
 
-    public Car(){
+
+    Car(){
         fahrerLicht = new Cabinlight();
         frontScheinwerfer = new Headlight();
         motor = new Motor();
+        switchCount = 0;
     }
 
     @Override
@@ -20,6 +23,7 @@ public final class Car implements Switchable {
             motor.switchOn();
             frontScheinwerfer.switchOn();
             fahrerLicht.switchOff();
+            switchCount++;
         }
     }
 
@@ -29,6 +33,7 @@ public final class Car implements Switchable {
             motor.switchOff();
             frontScheinwerfer.switchOff();
             fahrerLicht.switchOn();
+            switchCount++;
         }
     }
 
@@ -40,5 +45,10 @@ public final class Car implements Switchable {
     @Override
     public boolean isSwitchedOff() {
         return motor.isSwitchedOff();
+    }
+
+    @Override
+    public long getSwitchCount() {
+        return switchCount;
     }
 }
