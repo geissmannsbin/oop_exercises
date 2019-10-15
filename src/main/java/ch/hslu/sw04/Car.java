@@ -2,19 +2,21 @@ package ch.hslu.sw04;
 
 import java.lang.management.MemoryType;
 
-public final class Car implements CountingSwitchable {
+public final class Car implements CountingSwitchable, Named {
 
     private Cabinlight fahrerLicht;
     private Headlight frontScheinwerfer;
     private Motor motor;
     private long switchCount;
+    private String name;
 
 
-    Car(){
+    Car(String name){
         fahrerLicht = new Cabinlight();
         frontScheinwerfer = new Headlight();
         motor = new Motor();
         switchCount = 0;
+        setName(name);
     }
 
     @Override
@@ -50,5 +52,15 @@ public final class Car implements CountingSwitchable {
     @Override
     public long getSwitchCount() {
         return switchCount;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }
