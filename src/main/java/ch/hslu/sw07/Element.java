@@ -1,5 +1,7 @@
 package ch.hslu.sw07;
 
+import java.util.Objects;
+
 /**
  * @author robin
  */
@@ -40,6 +42,17 @@ public abstract class Element implements Comparable<Element> {
         return this.getName() + " Zustand:" + this.getState();
     }
 
+    @Override
+    public final boolean equals(Object o){
+        if(this == o){
+            return true;
+        }
+        if(!(o instanceof Blei)){
+            return false;
+        }
+        final Element testElement = (Element) o;
+        return (Objects.equals(this.getName(), testElement.getName())) && (Objects.equals(this.getState(), testElement.getState())) && (this.getTempCels() == testElement.getTempCels());
+    }
     /**
      * Zwei Element-Objekte werden anhand ihrer Temperatur verglichen
      */
