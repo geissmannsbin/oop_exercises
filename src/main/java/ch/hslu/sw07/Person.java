@@ -6,68 +6,78 @@ import java.util.Objects;
  * Person with a unique ID
  * @author Robin Geissmann
  */
-public class Person implements Comparable<Person>, Sleepable {
+public class Person implements Comparable<Person> {
     private final long id;
-    private boolean isAwake;
     private String firstName;
     private String lastName;
 
-    public Person(long id, String first, String last) {
+    /**
+     * Constructor
+     * @param id
+     * @param firstName
+     * @param lastName
+     */
+    public Person(long id, String firstName, String lastName) {
         this.id = id;
-        this.firstName = first;
-        this.lastName = last;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     /**
-     * @return the firstName
+     *
+     * @return firstName
      */
     public String getfirstName() {
         return firstName;
     }
 
     /**
-     * @return the lastName
+     * @return lastName
      */
     public String getlastName() {
         return lastName;
     }
 
     /**
-     * @return the id
+     * @return id
      */
     public long getId() {
         return id;
     }
 
+    /**
+     *
+     * @return object.toString()
+     */
     @Override
     public final String toString() {
         return "Person-Objekt mit Namen: " + this.firstName + " und Nachnamen: " + this.lastName + " und ID: " + this.id;
     }
 
     /**
-     * Override of the Object .equals()-Method. Two Person-Objects are only
-     * equal, if they're of the same type and have the same id.
+     *
+     * @param o
+     * @return boolean
      */
     @Override
-    public final boolean equals(Object obj) {
-        if (obj instanceof Person) {
-            final Person person = (Person) obj;
-            if (person.getId() == this.getId()) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
+    public final boolean equals(Object o) {
+        if(this == o){
+            return true;
+        }
+        if(!(o instanceof Person)) {
             return false;
         }
+        final Person testPerson = (Person) o;
+        return (testPerson.id == this.id) && (Objects.equals(this.firstName, testPerson.firstName)) && (Objects.equals(this.lastName, testPerson.lastName));
     }
 
     /**
-     *  Two persons are equal if their ID is equal
+     *
+     * @return hash value of the object
      */
     @Override
     public final int hashCode() {
-        return Objects.hash(this.id, 100);
+        return Objects.hash(id, firstName, lastName);
     }
 
     /**
@@ -76,29 +86,5 @@ public class Person implements Comparable<Person>, Sleepable {
     @Override
     public final int compareTo(Person o) {
         return Long.compare(this.id, o.id);
-    }
-
-    /**
-     * Is awake?
-     */
-    @Override
-    public boolean isAwake() {
-        return this.isAwake;
-    }
-
-    /**
-     * Send to Sleep
-     */
-    @Override
-    public void sendToSleep() {
-        this.isAwake = false;
-    }
-
-    /**
-     * Wake Up.
-     */
-    @Override
-    public void wakeUp() {
-        this.isAwake = true;
     }
 }

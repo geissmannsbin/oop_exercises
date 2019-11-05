@@ -1,9 +1,8 @@
 package ch.hslu.sw07;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,6 +44,14 @@ class PersonTest {
         if (person.equals(person1)) {
             assertEquals(person.hashCode(), person1.hashCode());
         }
+    }
+
+    /**
+     * https://jqno.nl/equalsverifier/manual/immutability/ got an immutability Warning, but I want to be able to change a Persons name..suppress(Warning.NONFINAL_FIELDS)
+     * */
+    @Test
+    void testEqualsContract(){
+        EqualsVerifier.forClass(Person.class).suppress(Warning.NONFINAL_FIELDS).verify();
     }
 
     @Test
