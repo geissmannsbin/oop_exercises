@@ -81,7 +81,7 @@ public class Person implements Comparable<Person> {
     }
 
     /**
-     * Two persons are equal if their ID is equal
+     * Two persons are equal if their ID is bigger or smaller (returns -1, 0, 1)
      */
     @Override
     public final int compareTo(Person o) {

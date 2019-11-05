@@ -12,7 +12,6 @@ class PersonTest {
     private static final String firstName = "Robin";
     private static final String lastName = "Geissmann";
 
-
     @Test
     void getFirstname() {
         assertEquals(firstName, person.getfirstName());
